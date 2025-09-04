@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Notes Portal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">📘 College Notes Portal</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#courses">Courses</a>
+      <a href="#notes">Notes</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#upload" id="uploadNav" style="display:none;">Upload</a>
+      <a href="#admin" id="adminNav" style="display:none;">Admin</a>
+      <div class="auth-buttons">
+        <br>
+        <a href="#login" class="btn">Login</a>
+        <a href="#register" class="btn">Sign Up</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="hero">
+    <div class="hero-text">
+      <h1>Welcome to the College Notes & Resources Portal</h1>
+      <p>Access notes, enroll in courses, and download resources easily!</p>
+      <a href="#courses" class="cta-btn">Explore Courses</a>
+    </div>
+    <div class="hero-img">
+      <img src="https://www.shutterstock.com/image-vector/student-portal-isometric-colored-illustration-600w-2567901423.jpg" alt="Study Image">
+    </div>
+  </section>
+
+  <!-- Login Section -->
+  <section id="login" class="form-container">
+    <h2>Login</h2>
+    <form onsubmit="return loginUser(event)">
+      <input type="email" id="loginEmail" placeholder="Enter Email" required>
+      <input type="password" id="loginPassword" placeholder="Enter Password" required>
+      <select id="loginRole" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#register">Sign up</a></p>
+  </section>
+
+  <!-- Register Section -->
+  <section id="register" class="form-container">
+    <h2>Create Account</h2>
+    <form onsubmit="return registerUser(event)">
+      <input type="text" id="regName" placeholder="Full Name" required>
+      <input type="email" id="regEmail" placeholder="Email" required>
+      <input type="password" id="regPassword" placeholder="Password" required>
+      <select id="regRole" required>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+      </select>
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <!-- Courses Section -->
+  <section id="courses" class="courses">
+    <h2>Available Courses</h2>
+    <div class="course-container">
+      <div class="course-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdCl4zZrcB7kwwZWw7pPXlT2QoFj43IzPcXA&s" alt="Java">
+        <h3>Java Programming</h3>
+        <button onclick="enrollCourse('Java Programming')">Enroll</button>
+      </div>
+      <div class="course-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkK8yKeCHvz6GY-v09uC2zb0hpgF3BWDpZ8A&s" alt="DBMS">
+        <h3>Database Management</h3>
+        <button onclick="enrollCourse('DBMS')">Enroll</button>
+      </div>
+      <div class="course-card">
+        <img src="https://www.thinknexttraining.com/images/DSA-Course-mob.jpg" alt="DSA">
+        <h3>Data Structures</h3>
+        <button onclick="enrollCourse('DSA')">Enroll</button>
+      </div>
+      <div class="course-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeIeVu7kf17z_H1uf9ZKaxnNbaavKzuAJ9rw&s" alt="Python">
+        <h3>Python Programming</h3>
+        <button onclick="enrollCourse('Python')">Enroll</button>
+      </div>
+      <div class="course-card">
+        <img src="https://www.achieversit.com/management/uploads/course_image/web-dev-img1.jpeg" alt="Web Development">
+        <h3>Web Development</h3>
+        <button onclick="enrollCourse('Web Development')">Enroll</button>
+      </div>
+      <div class="course-card">
+        <img src="https://www.thinknexttraining.com/images/ai-course-chandigarh-banner-mob.jpg" alt="AI">
+        <h3>Artificial Intelligence</h3>
+        <button onclick="enrollCourse('AI')">Enroll</button>
+      </div>
+      <div class="course-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS23FKlrjGg-WMpqowqleR07edXwP9DwHrrRA&s" alt="ML">
+        <h3>Machine Learning</h3>
+        <button onclick="enrollCourse('Machine Learning')">Enroll</button>
+      </div>
+      <div class="course-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY4B99PUIJhd4Hi9Q8eqIFcImc0U4IWxMgyA&s" alt="Networks">
+        <h3>Computer Networks</h3>
+        <button onclick="enrollCourse('Computer Networks')">Enroll</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notes Section -->
+  <section id="notes" class="notes">
+    <h2>Download Notes</h2>
+    <input type="text" id="searchNotes" placeholder="Search notes..." onkeyup="searchNotes()">
+    <ul id="notesList">
+      <li data-course="Java Programming"><a href="assets/java_notes.pdf" download>📘 Java Programming Notes</a></li>
+      <li data-course="DBMS"><a href="assets/dbms_notes.pdf" download>💾 DBMS Notes</a></li>
+      <li data-course="DSA"><a href="assets/dsa_notes.pdf" download>🧮 Data Structures Notes</a></li>
+      <li data-course="Python Programming"><a href="assets/python_notes.pdf" download>🐍 Python Programming Notes</a></li>
+      <li data-course="Web Development"><a href="assets/webdev_notes.pdf" download>🌐 Web Development Notes</a></li>
+      <li data-course="Artificial Intelligence"><a href="assets/ai_notes.pdf" download>🤖 AI Notes</a></li>
+      <li data-course="Machine Learning"><a href="assets/ml_notes.pdf" download>📊 Machine Learning Notes</a></li>
+      <li data-course="Computer Networks"><a href="assets/networks_notes.pdf" download>🔗 Computer Networks Notes</a></li>
+    </ul>
+    <p id="noResultMsg" style="display:none; color:red; margin-top:10px;">❌ No notes found</p>
+  </section>
+
+  <!-- Upload Section -->
+  <section id="upload" class="form-container" style="display:none;">
+    <h2>Upload Notes</h2>
+    <form onsubmit="return uploadNotes(event)">
+      <input type="text" id="noteTitle" placeholder="Title" required>
+      <input type="file" id="noteFile" accept=".pdf,.doc,.docx,.ppt,.pptx" required>
+      <select id="noteCourse" required>
+        <option value="Java Programming">Java Programming</option>
+        <option value="DBMS">DBMS</option>
+        <option value="DSA">DSA</option>
+        <option value="Python Programming">Python Programming</option>
+        <option value="Web Development">Web Development</option>
+        <option value="AI">AI</option>
+        <option value="Machine Learning">Machine Learning</option>
+        <option value="Computer Networks">Computer Networks</option>
+      </select>
+      <button type="submit">Upload</button>
+    </form>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard" class="content">
+    <h2>Welcome, <span id="userName"></span> (<span id="userRole"></span>)</h2>
+    <p>Your enrolled courses:</p>
+    <ul id="enrolledCourses"></ul>
+    <button onclick="logoutUser()">Logout</button>
+  </section>
+
+  <!-- Admin Section -->
+  <section id="admin" class="content" style="display:none;">
+    <h2>Admin Panel</h2>
+    <div id="userList"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 College Notes Portal | Designed with ❤️</p>
+  </footer>
+
+  <script>
+    let enrolled = [];
+
+    // Search Notes
+    function searchNotes() {
+      let input = document.getElementById("searchNotes").value.toLowerCase();
+      let notes = document.querySelectorAll("#notesList li");
+      let found = false;
+
+      notes.forEach(note => {
+        let text = note.innerText.toLowerCase();
+        if (text.includes(input)) {
+          note.style.display = "block";
+          found = true;
+        } else {
+          note.style.display = "none";
+        }
+      });
+
+      document.getElementById("noResultMsg").style.display = found ? "none" : "block";
+    }
+
+    // Enroll in Course
+    function enrollCourse(courseName) {
+      if (!enrolled.includes(courseName)) {
+        enrolled.push(courseName);
+        let list = document.getElementById("enrolledCourses");
+        let li = document.createElement("li");
+        li.innerText = courseName;
+        list.appendChild(li);
+        alert("✅ Enrolled in " + courseName);
+      } else {
+        alert("⚠ Already enrolled in " + courseName);
+      }
+    }
+
+    function loginUser(event){event.preventDefault();alert("Login simulation");}
+    function registerUser(event){event.preventDefault();alert("Register simulation");}
+    function uploadNotes(event){event.preventDefault();alert("Upload simulation");}
+    function logoutUser(){alert("Logged out");}
+  </script>
+</body>
+</html>
